@@ -1,32 +1,32 @@
-# Sample Component
+# Newsletter Component
 
-Utilize this section to detail the component, explaining the specific problem it addresses, its ideal use cases, and step-by-step instructions on how to implement it. This comprehensive description will help users understand its relevance and functionality, ensuring they can effectively integrate and leverage the component in their Shopify storefronts. 
+ Newsletter component built for the Stores, utilized by almost all e-commerce stores across the globe! 
 
-**Live Preview Link**: https://dummyimage.com/
+**Live Preview Link**: https://fashion-fussions.myshopify.com/?preview_theme_id=128435257418
 
 
 ## Features
 
- - Feature 1 [*Example: Option to show / hide slider dots*]
- - Feature 2 [*Example: Option to switch layout grid / slider*]
- - Feature 3 [*Example: Option to customise rating stars*]
+ - Feature 1 Page width add are remove
+ - Feature 2 Background color
+ - Feature 3 After submiting email animation
 
 
 ## Dependencies
 
- - Dependency 1 [*Example: Splide slider (https://splidejs.com/)*]
- - Dependency 2 [*Example: Animate CSS (https://animate.style/)*]
- - Dependency 3 [*Example: Google sheet API Key*]
+ - Dependency 1 Animate "https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"
 
 
 ## Implementation Steps
 
  - ### Step 1: 
-   Navigate to `theme.liquid` file under Layout folder
+ Add or replace the newsletter.liquid file under sections folder
    
   - ### Step 2:
-	 Add the below code / Copy the code from `src` folder and paste it in
-   `theme.liquid` file just above closing of `</body>` tag
+	Add newslatter.css file under assets folder
+
+ - ### Step 3:
+	Add newslatter.js in your assets folder
 
 # Important Notes
 
