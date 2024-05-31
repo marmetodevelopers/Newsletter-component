@@ -1,0 +1,138 @@
+  <!-- Include Canvas Confetti Library  for the animation-->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer="defer"></script>
+<script src="{{ 'newslatter.js' | asset_url }}" defer="defer"></script>
+{{ 'newslatter.css' | asset_url | stylesheet_tag: preload: true }}
+
+{% style %}
+.bg-{{ section.id }}{
+   background: {{ section.settings.bg_color}}
+}
+@media screen and (min-width: 750px){
+  .section-spacing-{{ section.id }}{
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }  
+}
+@media screen and (max-width: 749px){
+.section-spacing-{{ section.id }}{
+    padding-top: {{ section.settings.mpadding_top }}px;
+    padding-bottom: {{ section.settings.mpadding_bottom }}px;
+  }
+}
+{% endstyle %}
+
+
+<newsletter-section class="{% if section.settings.full_width == true %} page-width {% endif %} section-spacing-{{ section.id }}">
+   <section class="newsletter-section bg-{{ section.id }}">
+      {% if section.settings.section_title != blank %}
+      <label for="Email">{{ section.settings.section_title | escape }}</label>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+      <p>{{ section.settings.subheading | escape }}</p>
+      {% endif %}
+      {% form 'customer' %}
+      {{ form.errors | default_errors }}
+      {% if form.posted_successfully? %}
+      <p class="thank-you-message"> <span>{{ section.settings.svg_icon }}</span> {{ section.settings.success_message }}</p>
+      {% else %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="email"
+         name="contact[email]"
+         id="Email"
+         value="{% if customer.email != blank %}{{ customer.email }}{% endif %}"
+         placeholder="Submit"
+         autocorrect="off"
+         autocapitalize="off">
+      <button type="submit" name="commit" id="Subscribe">
+      <span>Submit</span>
+      </button>
+      {% endif %}
+      {% endform %}
+   </section>
+</newsletter-section>
+
+{% schema %}
+{
+  "name": "Newsletter Subscription",
+  "settings": [
+     {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop Padding Top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop Padding Bottom",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mpadding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mpadding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 30
+    },
+    {
+      "type": "checkbox",
+      "id":"full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id":"bg_color",
+      "label": "Background color"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Heading",
+      "default": "Subscribe to Our Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "html",
+      "id": "svg_icon",
+      "label": "Success Message Icon",
+      "placeholder": "Insert your SVG code here."
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "Thank you for subscribing!"
+    }
+  ],
+  "presets": [{
+    "name": "Newsletter Subscription"
+  }]
+}
+
+{% endschema %}
